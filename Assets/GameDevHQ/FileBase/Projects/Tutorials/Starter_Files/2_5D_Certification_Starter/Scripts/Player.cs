@@ -20,6 +20,11 @@ public class Player : MonoBehaviour
 
     private Animator _anim;
 
+    [SerializeField]
+    private bool onLedge = false;
+
+    private LedgeGrab _activeLedge;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +35,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         CaluculateMovement();
+
+        if(onLedge == true)
+        {
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                _anim.SetTrigger("ClimbUp");
+            }
+        }    
      
     }
     
@@ -43,6 +57,7 @@ public class Player : MonoBehaviour
                 _jumping = false;
                 _anim.SetBool("Jumping", _jumping);
             }
+
             //horizontal movement 
             float h = Input.GetAxisRaw("Horizontal"); // using getaxisraw because the float value slowly increments to 1. Raw tells it to go to 1 asap.
             _direction = new Vector3(0, 0, h);//because moving left and right depends on the z axis her
@@ -74,14 +89,32 @@ public class Player : MonoBehaviour
         _controller.Move(_direction * _speed * Time.deltaTime);
     }
 
-    public void LedgeGrab(Vector3 handPosition)
+    public void LedgeGrab(Vector3 handPosition, LedgeGrab currentLedge)
     {
+        onLedge = true;
         _controller.enabled = false;
         _anim.SetBool("LedgeGrab", true);
         //update position to hand position. 
         
         transform.position = handPosition;
+        _anim.SetFloat("Speed", 0.0f);
+        _anim.SetBool("Jumping", false);
+        _activeLedge = currentLedge;
 
+    }
+    public void ClimbUpComplete()
+    {
+        //snap position
+        transform.position = _activeLedge.GetStandPos();
+        _anim.SetBool("LedgeGrab", false);
+
+      //  _controller.enabled = true;
+
+    }
+
+    public void StandUpComplete()
+    {
+        _controller.enabled = true;
     }
 
 }

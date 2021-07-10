@@ -8,6 +8,9 @@ public class LedgeGrab : MonoBehaviour
     [SerializeField]
     private Vector3 handPosition;
 
+    [SerializeField]
+    private Vector3 standPosition;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag ("Ledge_Grab_Checker"))
@@ -19,8 +22,12 @@ public class LedgeGrab : MonoBehaviour
             if(player != null)
             {
                 //call ledge grab method
-                player.LedgeGrab(handPosition);
+                player.LedgeGrab(handPosition, this);
             }
         }
+    }
+    public Vector3 GetStandPos()
+    {
+        return standPosition;
     }
 }

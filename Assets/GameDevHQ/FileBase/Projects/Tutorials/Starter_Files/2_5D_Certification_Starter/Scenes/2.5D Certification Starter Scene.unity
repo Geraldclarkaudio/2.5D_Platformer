@@ -166,7 +166,7 @@ Transform:
   m_GameObject: {fileID: 390171699}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.22, y: 0.59, z: -3.07}
-  m_LocalScale: {x: 2.9184408, y: 0.28112, z: 2.544172}
+  m_LocalScale: {x: 2.9184408, y: 0.28112, z: 3.826689}
   m_Children: []
   m_Father: {fileID: 4000101874767090968}
   m_RootOrder: 23
@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPosition: {x: 0.23, y: 67.48, z: 123.42}
+  standPosition: {x: 0.23, y: 74.59, z: 125.1}
 --- !u!1 &1216695342
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,9 +352,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7535160321178618387, guid: 6bc04df52ad4dea42a4bc870c13baea0, type: 3}
+      propertyPath: _jumpHeight
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7535160321178618391, guid: 6bc04df52ad4dea42a4bc870c13baea0, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7535160321178618391, guid: 6bc04df52ad4dea42a4bc870c13baea0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -450,7 +455,7 @@ Transform:
   - {fileID: 289086227097985536}
   - {fileID: 1216695344}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1688149344 stripped
 GameObject:
@@ -550,12 +555,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120877326}
-  m_LocalRotation: {x: -0.10046809, y: 0.72113067, z: -0.107004285, w: -0.67707235}
-  m_LocalPosition: {x: 16.05785, y: 78.97013, z: 121.74701}
+  m_LocalRotation: {x: -0.006555171, y: 0.7113065, z: -0.006611811, w: -0.7028204}
+  m_LocalPosition: {x: 16.557281, y: 74.38433, z: 115.563225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2120877330
 MonoBehaviour:
