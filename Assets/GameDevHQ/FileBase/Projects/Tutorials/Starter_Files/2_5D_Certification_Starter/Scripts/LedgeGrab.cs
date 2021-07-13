@@ -18,7 +18,9 @@ public class LedgeGrab : MonoBehaviour
             //disable character controller
 
             //get player component
+            Debug.Log("Collision Occurrrrred");
             var player = other.transform.parent.GetComponent<Player>();
+
             if(player != null)
             {
                 //call ledge grab method
