@@ -39,7 +39,6 @@ public class LiftTrigger : MonoBehaviour
         if(goingUp == false)
         {
             transform.position = Vector3.MoveTowards(transform.position, pointB.position, _speed * Time.deltaTime);
-
         }
 
         else if(goingUp == true)
@@ -49,11 +48,25 @@ public class LiftTrigger : MonoBehaviour
 
         if(transform.position == pointB.position)
         {
-            goingUp = true;
+            StartCoroutine(ElevatorDelayUp()); // not working
         }
         else if (transform.position == pointA.position)
         {
-            goingUp = false;
+            StartCoroutine(ElevatorDelayDown()); // not working
         }
+    }
+
+    IEnumerator ElevatorDelayDown()
+    {
+        yield return new WaitForSeconds(5.0f);
+        goingUp = false;
+
+    }
+
+    IEnumerator ElevatorDelayUp()
+    {
+        yield return new WaitForSeconds(5.0f);
+        goingUp = true;
+
     }
 }
