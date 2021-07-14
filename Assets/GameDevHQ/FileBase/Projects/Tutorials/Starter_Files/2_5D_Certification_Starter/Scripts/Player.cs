@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool onLedge = false;
 
+    [SerializeField]
+    private bool hasRolled = false;
+
     private LedgeGrab _activeLedge;
 
     // Start is called before the first frame update
@@ -57,6 +60,11 @@ public class Player : MonoBehaviour
                 _jumping = false;
                 _anim.SetBool("Jumping", _jumping);
             }
+            if(hasRolled == true)
+            {
+                hasRolled = false;
+                _anim.SetBool("isRolling", hasRolled);
+            }
 
             //horizontal movement 
             float h = Input.GetAxisRaw("Horizontal"); // using getaxisraw because the float value slowly increments to 1. Raw tells it to go to 1 asap.
@@ -78,6 +86,13 @@ public class Player : MonoBehaviour
                 //trigger jump anim
                 _jumping = true;
                 _anim.SetBool("Jumping", _jumping);
+            }
+
+            //ROLL
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                _anim.SetBool("isRolling", true);
+                hasRolled = true;
             }
 
         }
