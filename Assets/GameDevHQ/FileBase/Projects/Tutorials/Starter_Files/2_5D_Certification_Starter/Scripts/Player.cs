@@ -28,11 +28,21 @@ public class Player : MonoBehaviour
 
     private LedgeGrab _activeLedge;
 
+    [SerializeField]
+    private int collectable;
+
+    private UIManager _uiManager;
+
     // Start is called before the first frame update
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         _anim = GetComponentInChildren<Animator>(); // getting animator component on the child game object "Model"
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        if(_uiManager == null)
+        {
+            Debug.LogError("UIMANAGER is NULL");
+        }
     }
 
     // Update is called once per frame
@@ -132,4 +142,9 @@ public class Player : MonoBehaviour
         _controller.enabled = true;
     }
 
+    public void CoinCollect()
+    {
+        collectable++;
+        _uiManager.UpdateCollected(collectable);
+    }
 }
