@@ -17,12 +17,19 @@ public class LiftTrigger : MonoBehaviour
     [SerializeField]
     private bool goingUp = false;
 
+    [SerializeField]
+    private Transform floorCam;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             inTrigger = true;
             other.transform.parent = this.transform;
+            Camera.main.transform.position = floorCam.transform.position;
+            Camera.main.transform.rotation = floorCam.transform.rotation;
+            floorCam.transform.parent = this.transform;
+
         }
     }
     private void OnTriggerExit(Collider other)

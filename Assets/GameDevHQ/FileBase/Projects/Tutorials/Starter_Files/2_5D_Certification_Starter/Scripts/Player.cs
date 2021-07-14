@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
 
     private UIManager _uiManager;
 
+    [SerializeField]
+    private Transform mainCamPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,8 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("UIMANAGER is NULL");
         }
+
+        Camera.main.transform.position = mainCamPos.transform.position;
     }
 
     // Update is called once per frame
