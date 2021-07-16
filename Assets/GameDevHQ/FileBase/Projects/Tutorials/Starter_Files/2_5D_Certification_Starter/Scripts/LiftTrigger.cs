@@ -6,6 +6,7 @@ public class LiftTrigger : MonoBehaviour
 {
     [SerializeField]
     private bool inTrigger = false;
+    private bool goingDown = false;
 
     [SerializeField]
     private Transform pointA;
@@ -24,11 +25,18 @@ public class LiftTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            inTrigger = true;
-            other.transform.parent = this.transform;
-            Camera.main.transform.position = floorCam.transform.position;
-            Camera.main.transform.rotation = floorCam.transform.rotation;
-            floorCam.transform.parent = this.transform;
+            Player _player = GameObject.Find("Player").GetComponent<Player>();
+
+            if(_player != null)
+            {
+                inTrigger = true;
+                other.transform.parent = this.transform;//so the player stays on platform
+                floorCam.transform.parent = this.transform; // so the floor virtual cam resets in the proper position when reentering
+                Camera.main.transform.parent = this.transform;
+                Camera.main.transform.position = floorCam.transform.position;
+                Camera.main.transform.rotation = floorCam.transform.rotation;
+            
+            }
 
         }
     }
@@ -38,28 +46,32 @@ public class LiftTrigger : MonoBehaviour
         {
             inTrigger = false;
             other.transform.parent = null;
+            Camera.main.transform.parent = null;
         }
     }
 
     private void FixedUpdate()
     {
-        if(goingUp == false)
+        if(goingDown == true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, pointB.position, _speed * Time.deltaTime);
-        }
+            if (goingUp == false)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, pointB.position, _speed * Time.deltaTime);
+            }
 
-        else if(goingUp == true)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, pointA.position, _speed * Time.deltaTime);
-        }
+            else if (goingUp == true)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, pointA.position, _speed * Time.deltaTime);
+            }
 
-        if(transform.position == pointB.position)
-        {
-            StartCoroutine(ElevatorDelayUp()); // not working
-        }
-        else if (transform.position == pointA.position)
-        {
-            StartCoroutine(ElevatorDelayDown()); // not working
+            if (transform.position == pointB.position)
+            {
+                StartCoroutine(ElevatorDelayUp());
+            }
+            else if (transform.position == pointA.position)
+            {
+                StartCoroutine(ElevatorDelayDown());
+            }
         }
     }
 
@@ -76,4 +88,9 @@ public class LiftTrigger : MonoBehaviour
         goingUp = true;
 
     }
+
+    public void CallElevator()
+    {
+        goingDown = true;
+    }    
 }

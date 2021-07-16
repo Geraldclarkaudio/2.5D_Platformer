@@ -8,6 +8,8 @@ public class LookAtPlayer : MonoBehaviour
 
     public Transform _target;
 
+
+
     public Transform _floorCam;
 
     // Update is called once per frame
@@ -16,6 +18,7 @@ public class LookAtPlayer : MonoBehaviour
         if(transform.position == _floorCam.transform.position)
         {
             transform.LookAt(_target);
+            
         }
        
     }
