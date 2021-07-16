@@ -27,7 +27,6 @@ public class Elevator_Button : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            Debug.Log("TriggerActive");
             inTrigger = true;
         }
     }
@@ -40,16 +39,25 @@ public class Elevator_Button : MonoBehaviour
         }    
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if(inTrigger == true)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                //change materiall color of the sphere
-                Button.material.color = Color.green;
-                elevatorCalled = true;
-                _liftTrigger.CallElevator();
+                if(elevatorCalled == false)
+                {
+                    Button.material.color = Color.green;
+                    elevatorCalled = true;
+                    _liftTrigger.CallElevator();
+                }
+                else
+                {
+                    Button.material.color = Color.red;
+                    elevatorCalled = false;
+                    _liftTrigger.StopElevator();
+                }
+                
             }
         }
     }

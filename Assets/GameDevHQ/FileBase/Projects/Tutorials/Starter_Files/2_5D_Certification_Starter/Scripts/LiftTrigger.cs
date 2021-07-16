@@ -93,4 +93,8 @@ public class LiftTrigger : MonoBehaviour
     {
         goingDown = true;
     }    
+    public void StopElevator()
+    {
+        goingDown = false;
+    }
 }

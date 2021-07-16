@@ -15,9 +15,6 @@ public class LedgeGrab : MonoBehaviour
     {
         if(other.CompareTag ("Ledge_Grab_Checker"))
         {
-            //disable character controller
-
-            //get player component
             Debug.Log("Collision Occurrrrred");
             var player = other.transform.parent.GetComponent<Player>();
 
