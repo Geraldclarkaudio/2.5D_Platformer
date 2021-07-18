@@ -33,6 +33,7 @@ public class Ladder : MonoBehaviour
         if(other.tag == "Player")
         {
             canClimb = false;
+         
         }    
     }
 
