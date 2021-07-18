@@ -24,9 +24,13 @@ public class Player : MonoBehaviour
     private bool onLedge = false;
 
     [SerializeField]
+    private bool onLadder = false;
+
+    [SerializeField]
     private bool hasRolled = false;
 
     private LedgeGrab _activeLedge;
+    private Ladder _ladder;
 
     [SerializeField]
     private int collectable;
@@ -35,6 +39,9 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private Transform mainCamPos;
+
+    [SerializeField]
+    private Transform ladderWaypoint;
 
     // Start is called before the first frame update
     void Start()
@@ -62,8 +69,17 @@ public class Player : MonoBehaviour
             {
                 _anim.SetTrigger("ClimbUp");
             }
-        }    
-     
+        } 
+        if(onLadder == true)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, ladderWaypoint.position, 4.0f * Time.deltaTime);
+        }
+        if(transform.position == ladderWaypoint.position)
+        {
+            onLadder = false;
+            _anim.SetTrigger("FinishLadder");
+        }
+        
     }
     
     void CaluculateMovement()
@@ -83,7 +99,7 @@ public class Player : MonoBehaviour
 
             //horizontal movement 
             float h = Input.GetAxisRaw("Horizontal"); // using getaxisraw because the float value slowly increments to 1. Raw tells it to go to 1 asap.
-            _direction = new Vector3(0, 0, h);//because moving left and right depends on the z axis her
+            _direction = new Vector3(0, 0, h);//because moving left and right depends on the z axis here
             _anim.SetFloat("Speed", Mathf.Abs(h));
             
 
@@ -109,6 +125,9 @@ public class Player : MonoBehaviour
                 _anim.SetBool("isRolling", true);
                 hasRolled = true;
             }
+            //CLIMB LADDER
+
+           
 
         }
 
@@ -132,14 +151,31 @@ public class Player : MonoBehaviour
         _activeLedge = currentLedge;
 
     }
+
+    public void ClimbLadder(Vector3 handPosition, Ladder currentLadder)
+    {
+        onLadder = true;
+        _controller.enabled = false;
+        _anim.SetBool("climbLadder", true);
+        _anim.SetFloat("Speed", 0.0f);
+        _anim.SetBool("Jumping", false);
+
+        transform.position = handPosition;
+        _ladder = currentLadder;
+
+
+    }
     public void ClimbUpComplete()
     {
-        //snap position
         transform.position = _activeLedge.GetStandPos();
         _anim.SetBool("LedgeGrab", false);
 
-      //  _controller.enabled = true;
+    }
 
+    public void ClimbLadderComplete()
+    {
+        transform.position = _ladder.GetStandPos();
+        _anim.SetBool("climbLadder", false);
     }
 
     public void StandUpComplete()
