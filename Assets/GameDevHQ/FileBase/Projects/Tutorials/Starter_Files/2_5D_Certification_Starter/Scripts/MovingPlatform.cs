@@ -5,6 +5,8 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     [SerializeField]
+    private bool inTrigger = false;
+    [SerializeField]
     private Transform pointA;
     [SerializeField]
     private Transform pointB;
@@ -22,7 +24,7 @@ public class MovingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(moveToB == true)
         {
@@ -48,7 +50,12 @@ public class MovingPlatform : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            other.transform.parent = this.transform;
+            Player player = GameObject.Find("Player").GetComponent<Player>();
+            if(player != null)
+            {
+                other.transform.parent = this.transform;
+
+            }
         }
     }
 

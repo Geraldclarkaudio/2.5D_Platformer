@@ -7252,6 +7252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8881298361337019209}
   - component: {fileID: 8881298361337019208}
+  - component: {fileID: 1805211450}
   m_Layer: 0
   m_Name: Moving Platform
   m_TagString: Untagged
@@ -7266,7 +7267,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8881298361337019207}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.3, y: 55.4, z: 178.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7296,6 +7297,19 @@ MonoBehaviour:
   pointA: {fileID: 0}
   pointB: {fileID: 0}
   _speed: 5
+--- !u!65 &1805211450
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8881298361337019207}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.742052, y: 5.314804, z: 22.580368}
+  m_Center: {x: 1.0601091, y: 2.157402, z: 2.601143}
 --- !u!1 &8881298361341711524
 GameObject:
   m_ObjectHideFlags: 0
